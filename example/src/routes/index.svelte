@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import Counter from '$lib/Counter/index.svelte';
+	import { time, elapsed, writtenStore } from '$lib/stores';
 </script>
 
 <svelte:head>
@@ -27,6 +28,12 @@
 	</h2>
 
 	<Counter />
+</section>
+
+<section>
+	<div>Time: {$time}</div>
+	<div>Elapsed: {$elapsed}</div>
+	<div>Written: {$writtenStore}</div>
 </section>
 
 <style>

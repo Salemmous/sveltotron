@@ -1,15 +1,15 @@
 export default function sveltotron() {
-	const virtualFileId = '@sveltotron';
+	const mainId = '@sveltotron';
 
 	return {
 		name: 'sveltotron',
 		resolveId(id) {
-			if (id === virtualFileId) {
-				return virtualFileId;
+			if (id === mainId) {
+				return mainId;
 			}
 		},
 		load(id) {
-			if (id === virtualFileId) {
+			if (id === mainId) {
 				return `
                 export const startSveltotron = (config) => {
                     if(typeof(window) !== "undefined") {
@@ -18,6 +18,6 @@ export default function sveltotron() {
                 }
             `;
 			}
-		}
+		},
 	};
 }

@@ -81,6 +81,10 @@ io.on('connection', (client) => {
 	client.on('disconnect', () => {
 		sendMessage('server-disconnection');
 	});
+	client.onAny((name, data) => {
+		if (name !== 'update-store') console.log('EVENT', name, data);
+		sendMessage(name, data);
+	});
 });
 
 const SOCKET_IO_DEFAULT_PORT = 9090;

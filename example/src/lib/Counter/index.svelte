@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
 
-	let count = 0;
+	let count = 1;
 
 	const displayed_count = spring();
 	$: displayed_count.set(count);
@@ -11,6 +11,7 @@
 		// handle negative numbers
 		return ((n % m) + m) % m;
 	}
+	$: console.log(`COUNT IS NOW ${count}`);
 </script>
 
 <div class="counter">
