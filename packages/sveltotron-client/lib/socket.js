@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import { proxy } from './proxy';
 
 const DEFAULT_CONFIG = {
 	port: 9090,
@@ -12,7 +13,8 @@ export function start(config) {
 	const port = config?.port || DEFAULT_CONFIG.port;
 	const host = config?.host || DEFAULT_CONFIG.host;
 	const clientId = config?.clientId || DEFAULT_CONFIG.clientId;
-	const socket = io(`http://${host}:${port}`);
+	const address = `http://${host}:${port}`;
+	const socket = io(address);
 	socket.emit('init', { name: clientId });
 	const newConsole = {};
 	Object.entries(console).forEach(([key, value]) => {
@@ -23,6 +25,7 @@ export function start(config) {
 	});
 	console = newConsole;
 	initClient(socket);
+	proxy(address, emit);
 }
 
 let eventBuffer = [];

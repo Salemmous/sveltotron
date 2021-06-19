@@ -5,6 +5,16 @@
 <script lang="ts">
 	import Counter from '$lib/Counter/index.svelte';
 	import { time, elapsed, writtenStore } from '$lib/stores';
+	import axios from 'axios';
+
+	const handleRequest = async () => {
+		const res = await fetch('https://randomuser.me/api/');
+		res.json();
+	};
+	const handleAxiosRequest = async () => {
+		const res = await axios.get('https://randomuser.me/api/');
+		// res.data;
+	};
 </script>
 
 <svelte:head>
@@ -21,6 +31,10 @@
 		</div>
 
 		to your new<br />SvelteKit app
+		<br />
+		<button on:click={handleRequest}>Click here to test a GET request</button>
+		<br />
+		<button on:click={handleAxiosRequest}>Click here to test a GET request with Axios</button>
 	</h1>
 
 	<h2>

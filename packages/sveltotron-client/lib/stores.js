@@ -7,6 +7,7 @@ import { emit } from './socket';
 
 function createStoreListener(storeFunc, storeType) {
 	return (name, ...args) => {
+		if (typeof window === 'undefined') return storeFunc(...args);
 		const store = storeFunc(...args);
 		emit('init-store', { name, value: args, type: storeType });
 		store.subscribe((...value) => {
