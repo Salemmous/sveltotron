@@ -2,10 +2,10 @@ module.exports = {
 	mode: 'jit',
 	purge: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {},
 	},
 	variants: {
-		borderWidth: ['responsive', 'hover', 'focus']
+		borderWidth: ['responsive', 'hover', 'focus'],
 	},
-	plugins: []
+	plugins: [],
 };

@@ -8,7 +8,7 @@ function proxyFetch(emit) {
 	const _fetch = window.fetch;
 	window.fetch = async (url, options, ...args) => {
 		const uid = Math.floor(Math.random() * 99999999).toString();
-		emit('network-request', { ...options, url, uid });
+		emit('network-request', { ...options, url, uid, date: new Date() });
 		const res = await _fetch(url, options, ...args);
 		emit('network-response', {
 			...options,
@@ -18,6 +18,7 @@ function proxyFetch(emit) {
 			statusText: res.statusText,
 			data: await res.clone().text(),
 			responseType: res.type,
+			date: new Date(),
 		});
 		return res;
 	};
@@ -40,7 +41,7 @@ function proxyXMLHttpRequest(address, emit) {
 	const proxiedSend = proxiedRequest.prototype.send;
 	proxiedRequest.prototype.send = function (body) {
 		if (!this.requestInfo) return proxiedSend.apply(this, [].slice.call(arguments));
-		emit('network-request', { ...this.requestInfo, body });
+		emit('network-request', { ...this.requestInfo, body, date: new Date() });
 		//Here is where you can add any code to process the request.
 		//If you want to pass the Ajax request object, pass the 'pointer' below
 		const pointer = this;
@@ -54,6 +55,7 @@ function proxyXMLHttpRequest(address, emit) {
 				statusText: pointer.statusText,
 				data: pointer.responseText,
 				responseType: pointer.responseType,
+				date: new Date(),
 			});
 			//Here is where you can add any code to process the response.
 			//If you want to pass the Ajax request object, pass the 'pointer' below

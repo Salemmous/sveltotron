@@ -11,7 +11,7 @@
 
 <div class="flex flex-row">
 	<Sidebar />
-	<main class="ml-2">
+	<main class="ml-2 w-full">
 		<slot />
 	</main>
 </div>

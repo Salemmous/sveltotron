@@ -1,10 +1,12 @@
 <script>
+	import { connections } from '$lib/state';
 </script>
 
-<main>
-	<h1 class="text-blue-500">Hello world!</h1>
-	<p>
-		Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte apps.
-		<i class="fas fa-heart fa-fw" />
-	</p>
-</main>
+<section class="p-4">
+	<h1 class="text-blue-500">Devices</h1>
+	<div class="pt-8 w-full">
+		{#each $connections as connection}
+			<div class="py-8 border-t border-gray-100 border-opacity-50 w-full">{connection.name}</div>
+		{/each}
+	</div>
+</section>

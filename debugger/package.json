@@ -35,7 +35,9 @@
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
 		"electron-serve": "^1.1.0",
 		"electron-window-state": "^5.0.3",
+		"json-viewer-js": "^1.0.7",
 		"socket.io": "^4.1.2",
-		"svelte-awesome": "^2.3.2"
+		"svelte-awesome": "^2.3.2",
+		"svelte-json-tree": "^0.1.0"
 	}
 }
