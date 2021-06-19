@@ -12,7 +12,7 @@ export default function sveltotron() {
             if (id === virtualFileId) {
                 return `
             if(typeof(window) !== "undefined") {
-                console.log("Hello")
+                import("@sveltotron/client")
             }
             `;
             }

@@ -1,11 +1,20 @@
 {
-    "name": "root",
-    "private": true,
-    "devDependencies": {
-        "lerna": "^4.0.0"
-    },
-    "workspaces": [
-        "packages/*",
-        "example"
-    ]
+	"name": "root",
+	"scripts": {
+		"example": "yarn workspace sveltotron-example dev",
+		"debugger": "yarn workspace sveltotron-debugger electron"
+	},
+	"private": true,
+	"devDependencies": {
+		"eslint": "^7.29.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-svelte3": "^3.2.0",
+		"prettier": "^2.3.1",
+		"prettier-plugin-svelte": "^2.3.1"
+	},
+	"workspaces": [
+		"packages/*",
+		"example",
+		"debugger"
+	]
 }

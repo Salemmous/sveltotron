@@ -1,7 +1,7 @@
 {
-  "name": "sveltotron-client",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Thomas De Bluts",
-  "license": "MIT"
+    "name": "@sveltotron/client",
+    "version": "1.0.0",
+    "main": "lib/index.js",
+    "author": "Thomas De Bluts",
+    "license": "MIT"
 }

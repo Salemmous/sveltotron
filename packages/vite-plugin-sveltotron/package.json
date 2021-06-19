@@ -3,5 +3,8 @@
     "version": "1.0.0",
     "main": "index.mjs",
     "author": "Thomas De Bluts",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "@sveltotron/client": "1.0.0"
+    }
 }
