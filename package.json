@@ -2,7 +2,7 @@
 	"name": "root",
 	"scripts": {
 		"example": "yarn workspace sveltotron-example dev",
-		"debugger": "yarn workspace sveltotron-debugger electron"
+		"debugger": "yarn workspace @sveltotron/debugger electron"
 	},
 	"private": true,
 	"devDependencies": {

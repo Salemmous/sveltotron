@@ -6,8 +6,8 @@ try {
 } catch {}
 
 const loadURL = serve({ directory: '.' });
-const port = process.env.PORT || 3000;
-const isdev = !app.isPackaged || process.env.NODE_ENV == 'development';
+const port = process.env.PORT || 4000;
+const isDev = !app.isPackaged || process.env.NODE_ENV == 'development';
 let mainwindow;
 
 function loadVite(port) {
@@ -33,7 +33,7 @@ function createMainWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
-			devTools: isdev
+			devTools: isDev
 		}
 	});
 
@@ -41,12 +41,12 @@ function createMainWindow() {
 		mainwindow = null;
 	});
 
-	if (!isdev) mainwindow.removeMenu();
+	if (!isDev) mainwindow.removeMenu();
 	else mainwindow.webContents.openDevTools();
 
 	mws.manage(mainwindow);
 
-	if (isdev) loadVite(port);
+	if (isDev) loadVite(port);
 	else loadURL(mainwindow);
 }
 

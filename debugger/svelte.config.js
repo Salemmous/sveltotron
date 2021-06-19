@@ -1,21 +1,23 @@
-import preprocess from "svelte-preprocess";
-import adapter from "@sveltejs/adapter-static";
-//import node from "@sveltejs/adapter-node";
+import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-static';
 
-const dev = process.env.NODE_ENV == "development";
+const dev = process.env.NODE_ENV == 'development';
 
+/** @type {import('@sveltejs/kit').Config} */
 export default {
-    kit: {
-        //adapter: node()
-        adapter: adapter(),
-        target: "#svelte",
+	kit: {
+		//adapter: node()
+		adapter: adapter(),
+		target: '#svelte',
 
-        vite: {
-            compilerOptions: { dev },
-        },
-    },
+		vite: {
+			compilerOptions: { dev }
+		}
+	},
 
-    preprocess: preprocess({
-        postcss: true,
-    }),
+	preprocess: [
+		preprocess({
+			postcss: true
+		})
+	]
 };
