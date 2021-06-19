@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
-	import '@sveltotron';
+	import { startSveltotron } from '@sveltotron';
+	startSveltotron();
+
 </script>
 
 <Header />
@@ -43,4 +45,5 @@
 			padding: 40px 0;
 		}
 	}
+
 </style>

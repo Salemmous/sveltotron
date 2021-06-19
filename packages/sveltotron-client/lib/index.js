@@ -1,1 +1,4 @@
-console.log("HELLO YOU");
+export function start(config) {
+	console.log('HELLO YOU');
+	console.log(config);
+}
