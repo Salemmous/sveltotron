@@ -1,0 +1,7 @@
+{
+    "name": "vite-plugin-sveltotron",
+    "version": "1.0.0",
+    "main": "index.mjs",
+    "author": "Thomas De Bluts",
+    "license": "MIT"
+}
