@@ -3,5 +3,8 @@
 	"version": "1.0.0",
 	"main": "lib/index.js",
 	"author": "Thomas De Bluts",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"socket.io": "^4.1.2"
+	}
 }

@@ -8,11 +8,11 @@ export default {
 	kit: {
 		//adapter: node()
 		adapter: adapter(),
-		target: '#svelte',
+		target: '#svelte'
 
-		vite: {
-			compilerOptions: { dev }
-		}
+		// vite: {
+		// 	compilerOptions: { dev }
+		// }
 	},
 
 	preprocess: [
