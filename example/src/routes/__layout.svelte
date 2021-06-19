@@ -3,7 +3,6 @@
 	import '../app.css';
 	import { startSveltotron } from '@sveltotron';
 	startSveltotron();
-
 </script>
 
 <Header />
@@ -45,5 +44,4 @@
 			padding: 40px 0;
 		}
 	}
-
 </style>

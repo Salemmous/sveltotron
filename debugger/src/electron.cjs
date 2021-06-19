@@ -1,17 +1,18 @@
 const { app, ipcMain, BrowserWindow } = require('electron');
 const serve = require('electron-serve');
 const ws = require('electron-window-state');
-try {
-	require('electron-reloader')(module);
-} catch {}
+// try {
+// 	require('electron-reloader')(module);
+// } catch {}
+const http = require('http');
 
 const loadURL = serve({ directory: '.' });
 const port = process.env.PORT || 4000;
 const isDev = !app.isPackaged || process.env.NODE_ENV == 'development';
-let mainwindow;
+let mainWindow;
 
 function loadVite(port) {
-	mainwindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
+	mainWindow.loadURL(`http://127.0.0.1:${port}`).catch((err) => {
 		setTimeout(() => {
 			loadVite(port);
 		}, 200);
@@ -21,10 +22,10 @@ function loadVite(port) {
 function createMainWindow() {
 	let mws = ws({
 		defaultWidth: 1000,
-		defaultHeight: 800
+		defaultHeight: 800,
 	});
 
-	mainwindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		x: mws.x,
 		y: mws.y,
 		width: mws.width,
@@ -33,27 +34,63 @@ function createMainWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
-			devTools: isDev
-		}
+			devTools: isDev,
+		},
 	});
 
-	mainwindow.once('close', () => {
-		mainwindow = null;
+	mainWindow.once('close', () => {
+		mainWindow = null;
 	});
 
-	if (!isDev) mainwindow.removeMenu();
-	else mainwindow.webContents.openDevTools();
+	if (!isDev) mainWindow.removeMenu();
+	else mainWindow.webContents.openDevTools();
 
-	mws.manage(mainwindow);
+	mws.manage(mainWindow);
 
 	if (isDev) loadVite(port);
-	else loadURL(mainwindow);
+	else loadURL(mainWindow);
 }
 
 app.once('ready', createMainWindow);
 app.on('activate', () => {
-	if (!mainwindow) createMainWindow();
+	if (!mainWindow) createMainWindow();
 });
 app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') app.quit();
+	app.quit();
+});
+
+let messageBuffer = [];
+
+function sendMessage(message, ...args) {
+	if (!mainWindow) {
+		messageBuffer.push({ message, args });
+		return;
+	}
+	mainWindow.webContents.send(message, ...args);
+}
+
+let socketServer = http.createServer();
+const io = require('socket.io')(socketServer, {
+	cors: {
+		origin: '*',
+		methods: ['GET', 'POST'],
+	},
+});
+io.on('connection', (client) => {
+	sendMessage('server-connection');
+	client.on('disconnect', () => {
+		sendMessage('server-disconnection');
+	});
+});
+
+const SOCKET_IO_DEFAULT_PORT = 9090;
+
+socketServer.listen(SOCKET_IO_DEFAULT_PORT, () => {
+	sendMessage('server-started', { port: SOCKET_IO_DEFAULT_PORT });
+});
+
+ipcMain.on('page-init', () => {
+	const buffer = [...messageBuffer];
+	messageBuffer = [];
+	buffer.forEach(({ message, args }) => sendMessage(message, ...args));
 });
