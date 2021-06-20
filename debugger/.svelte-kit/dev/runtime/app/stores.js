@@ -21,19 +21,19 @@ const getStores = () => {
 
 	return {
 		page: {
-			subscribe: stores.page.subscribe
+			subscribe: stores.page.subscribe,
 		},
 		navigating: {
-			subscribe: stores.navigating.subscribe
+			subscribe: stores.navigating.subscribe,
 		},
 		// @ts-ignore - deprecated, not part of type definitions, but still callable
 		get preloading() {
 			console.error('stores.preloading is deprecated; use stores.navigating instead');
 			return {
-				subscribe: stores.navigating.subscribe
+				subscribe: stores.navigating.subscribe,
 			};
 		},
-		session: stores.session
+		session: stores.session,
 	};
 };
 
@@ -43,7 +43,7 @@ const page = {
 	subscribe(fn) {
 		const store = getStores().page;
 		return store.subscribe(fn);
-	}
+	},
 };
 
 /** @type {typeof import('$app/stores').navigating} */
@@ -52,7 +52,7 @@ const navigating = {
 	subscribe(fn) {
 		const store = getStores().navigating;
 		return store.subscribe(fn);
-	}
+	},
 };
 
 /** @param {string} verb */
@@ -60,7 +60,7 @@ const error = (verb) => {
 	throw new Error(
 		ssr
 			? `Can only ${verb} session store in browser`
-			: `Cannot ${verb} session store before subscribing`
+			: `Cannot ${verb} session store before subscribing`,
 	);
 };
 
@@ -81,7 +81,7 @@ const session = {
 	},
 	update: (updater) => {
 		error('update');
-	}
+	},
 };
 
 export { getStores, navigating, page, session, stores };

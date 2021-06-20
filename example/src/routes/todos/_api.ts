@@ -23,9 +23,9 @@ export async function api(request: Request<Locals>, resource: string, data?: {})
 	const res = await fetch(`${base}/${resource}`, {
 		method: request.method,
 		headers: {
-			'content-type': 'application/json'
+			'content-type': 'application/json',
 		},
-		body: data && JSON.stringify(data)
+		body: data && JSON.stringify(data),
 	});
 
 	// if the request came from a <form> submission, the browser's default
@@ -36,13 +36,13 @@ export async function api(request: Request<Locals>, resource: string, data?: {})
 		return {
 			status: 303,
 			headers: {
-				location: '/todos'
-			}
+				location: '/todos',
+			},
 		};
 	}
 
 	return {
 		status: res.status,
-		body: await res.json()
+		body: await res.json(),
 	};
 }

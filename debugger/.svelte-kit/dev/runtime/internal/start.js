@@ -8,7 +8,7 @@ import { set_paths } from '../paths.js';
 function scroll_state() {
 	return {
 		x: pageXOffset,
-		y: pageYOffset
+		y: pageYOffset,
 	};
 }
 
@@ -70,7 +70,7 @@ class Router {
 				// This will persist even if we navigate away from the site and come back
 				const new_state = {
 					...(history.state || {}),
-					'sveltekit:scroll': scroll_state()
+					'sveltekit:scroll': scroll_state(),
 				};
 				history.replaceState(new_state, document.title, window.location.href);
 			}, 50);
@@ -256,7 +256,7 @@ class Router {
 
 		this.renderer.notify({
 			path: info.path,
-			query: info.query
+			query: info.query,
 		});
 
 		await this.renderer.update(info, chain, false);
@@ -304,8 +304,8 @@ function normalize(loaded) {
 			return {
 				status: 500,
 				error: new Error(
-					`"error" property returned from load() must be a string or instance of Error, received type "${typeof error}"`
-				)
+					`"error" property returned from load() must be a string or instance of Error, received type "${typeof error}"`,
+				),
 			};
 		}
 
@@ -322,15 +322,15 @@ function normalize(loaded) {
 			return {
 				status: 500,
 				error: new Error(
-					'"redirect" property returned from load() must be accompanied by a 3xx status code'
-				)
+					'"redirect" property returned from load() must be accompanied by a 3xx status code',
+				),
 			};
 		}
 
 		if (typeof loaded.redirect !== 'string') {
 			return {
 				status: 500,
-				error: new Error('"redirect" property returned from load() must be a string')
+				error: new Error('"redirect" property returned from load() must be a string'),
 			};
 		}
 	}
@@ -420,7 +420,7 @@ class Renderer {
 		this.current = {
 			page: null,
 			session_id: null,
-			branch: []
+			branch: [],
 		};
 
 		/** @type {Map<string, import('./types').NavigationResult>} */
@@ -428,13 +428,13 @@ class Renderer {
 
 		this.loading = {
 			id: null,
-			promise: null
+			promise: null,
 		};
 
 		this.stores = {
 			page: page_store({}),
 			navigating: writable(null),
-			session: writable(session)
+			session: writable(session),
 		};
 
 		this.$session = null;
@@ -487,7 +487,7 @@ class Renderer {
 					page,
 					context,
 					status: is_leaf && status,
-					error: is_leaf && error
+					error: is_leaf && error,
 				});
 
 				branch.push(node);
@@ -500,7 +500,7 @@ class Renderer {
 					} else if (node.loaded.context) {
 						context = {
 							...context,
-							...node.loaded.context
+							...node.loaded.context,
 						};
 					}
 				}
@@ -519,7 +519,7 @@ class Renderer {
 				status: new_status,
 				error: new_error,
 				path: page.path,
-				query: page.query
+				query: page.query,
 			});
 		}
 
@@ -541,12 +541,12 @@ class Renderer {
 			this.stores.navigating.set({
 				from: {
 					path: this.current.page.path,
-					query: this.current.page.query
+					query: this.current.page.query,
 				},
 				to: {
 					path,
-					query
-				}
+					query,
+				},
 			});
 		}
 	}
@@ -571,13 +571,13 @@ class Renderer {
 					status: 500,
 					error: new Error('Redirect loop'),
 					path: info.path,
-					query: info.query
+					query: info.query,
 				});
 			} else {
 				if (this.router) {
 					this.router.goto(navigation_result.redirect, { replaceState: true }, [
 						...chain,
-						info.path
+						info.path,
 					]);
 				} else {
 					location.href = new URL(navigation_result.redirect, location.href).href;
@@ -650,9 +650,9 @@ class Renderer {
 			target: this.target,
 			props: {
 				stores: this.stores,
-				...result.props
+				...result.props,
 			},
-			hydrate: true
+			hydrate: true,
 		});
 
 		this.started = true;
@@ -692,9 +692,9 @@ class Renderer {
 				{
 					route,
 					path: info.path,
-					query: info.query
+					query: info.query,
 				},
-				no_cache
+				no_cache,
 			);
 			if (result) return result;
 		}
@@ -703,7 +703,7 @@ class Renderer {
 			status: 404,
 			error: new Error(`Not found: ${info.path}`),
 			path: info.path,
-			query: info.query
+			query: info.query,
 		});
 	}
 
@@ -722,11 +722,11 @@ class Renderer {
 			state: {
 				page,
 				branch,
-				session_id: this.session_id
+				session_id: this.session_id,
 			},
 			props: {
-				components: filtered.map((node) => node.module.default)
-			}
+				components: filtered.map((node) => node.module.default),
+			},
 		};
 
 		for (let i = 0; i < filtered.length; i += 1) {
@@ -792,10 +792,10 @@ class Renderer {
 				query: false,
 				session: false,
 				context: false,
-				dependencies: []
+				dependencies: [],
 			},
 			loaded: null,
-			context
+			context,
 		};
 
 		/** @type {Record<string, string>} */
@@ -806,7 +806,7 @@ class Renderer {
 					node.uses.params.add(key);
 					return page.params[key];
 				},
-				enumerable: true
+				enumerable: true,
 			});
 		}
 
@@ -827,7 +827,7 @@ class Renderer {
 					get query() {
 						node.uses.query = true;
 						return page.query;
-					}
+					},
 				},
 				get session() {
 					node.uses.session = true;
@@ -843,7 +843,7 @@ class Renderer {
 					node.uses.dependencies.push(href);
 
 					return started ? fetch(resource, info) : initial_fetch(resource, info);
-				}
+				},
 			};
 
 			if (error) {
@@ -882,7 +882,7 @@ class Renderer {
 			path: path !== this.current.page.path,
 			params: Object.keys(params).filter((key) => this.current.page.params[key] !== params[key]),
 			query: query.toString() !== this.current.page.query.toString(),
-			session: this.session_id !== this.current.session_id
+			session: this.session_id !== this.current.session_id,
 		};
 
 		/** @type {import('types/page').Page} */
@@ -928,7 +928,7 @@ class Renderer {
 					node = await this._load_node({
 						module,
 						page,
-						context
+						context,
 					});
 
 					const is_leaf = i === a.length - 1;
@@ -941,7 +941,7 @@ class Renderer {
 
 						if (node.loaded.redirect) {
 							return {
-								redirect: node.loaded.redirect
+								redirect: node.loaded.redirect,
 							};
 						}
 
@@ -979,7 +979,7 @@ class Renderer {
 								error,
 								module: await b[i](),
 								page,
-								context: node_loaded.context
+								context: node_loaded.context,
 							});
 
 							if (error_loaded.loaded.error) {
@@ -998,13 +998,13 @@ class Renderer {
 					status,
 					error,
 					path,
-					query
+					query,
 				});
 			} else {
 				if (node && node.loaded && node.loaded.context) {
 					context = {
 						...context,
-						...node.loaded.context
+						...node.loaded.context,
 					};
 				}
 
@@ -1028,13 +1028,13 @@ class Renderer {
 			host: this.host,
 			path,
 			query,
-			params: {}
+			params: {},
 		};
 
 		const node = await this._load_node({
 			module: await this.fallback[0],
 			page,
-			context: {}
+			context: {},
 		});
 
 		const branch = [
@@ -1044,8 +1044,8 @@ class Renderer {
 				error,
 				module: await this.fallback[1],
 				page,
-				context: node && node.loaded && node.loaded.context
-			})
+				context: node && node.loaded && node.loaded.context,
+			}),
 		];
 
 		return await this._get_navigation_result_from_branch({ page, branch });
@@ -1082,7 +1082,7 @@ async function start({ paths, target, session, host, route, spa, trailing_slash,
 		new Router({
 			base: paths.base,
 			routes,
-			trailing_slash
+			trailing_slash,
 		});
 
 	const renderer = new Renderer({
@@ -1090,7 +1090,7 @@ async function start({ paths, target, session, host, route, spa, trailing_slash,
 		fallback,
 		target,
 		session,
-		host
+		host,
 	});
 
 	init(router);
@@ -1107,7 +1107,7 @@ async function start({ paths, target, session, host, route, spa, trailing_slash,
 if (import.meta.env.VITE_SVELTEKIT_SERVICE_WORKER) {
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register(
-			/** @type {string} */ (import.meta.env.VITE_SVELTEKIT_SERVICE_WORKER)
+			/** @type {string} */ (import.meta.env.VITE_SVELTEKIT_SERVICE_WORKER),
 		);
 	}
 }

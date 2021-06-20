@@ -10,14 +10,14 @@
 			const todos = await res.json();
 
 			return {
-				props: { todos }
+				props: { todos },
 			};
 		}
 
 		const { message } = await res.json();
 
 		return {
-			error: new Error(message)
+			error: new Error(message),
 		};
 	};
 </script>
@@ -62,7 +62,7 @@
 				todos = [...todos, created];
 
 				form.reset();
-			}
+			},
 		}}
 	>
 		<input name="text" aria-label="Add todo" placeholder="+ tap to add a todo" />
@@ -82,7 +82,7 @@
 					pending: (data) => {
 						todo.done = !!data.get('done');
 					},
-					result: patch
+					result: patch,
 				}}
 			>
 				<input type="hidden" name="done" value={todo.done ? '' : 'true'} />
@@ -94,7 +94,7 @@
 				action="/todos/{todo.uid}.json?_method=patch"
 				method="post"
 				use:enhance={{
-					result: patch
+					result: patch,
 				}}
 			>
 				<input aria-label="Edit todo" type="text" name="text" value={todo.text} />
@@ -107,7 +107,7 @@
 				use:enhance={{
 					result: () => {
 						todos = todos.filter((t) => t.uid !== todo.uid);
-					}
+					},
 				}}
 			>
 				<button class="delete" aria-label="Delete todo" />

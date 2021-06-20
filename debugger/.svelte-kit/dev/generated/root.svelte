@@ -33,11 +33,11 @@
 	});
 </script>
 
-<svelte:component this={components[0]} {...(props_0 || {})}>
+<svelte:component this={components[0]} {...props_0 || {}}>
 	{#if components[1]}
-		<svelte:component this={components[1]} {...(props_1 || {})}>
+		<svelte:component this={components[1]} {...props_1 || {}}>
 			{#if components[2]}
-				<svelte:component this={components[2]} {...(props_2 || {})}/>
+				<svelte:component this={components[2]} {...props_2 || {}} />
 			{/if}
 		</svelte:component>
 	{/if}

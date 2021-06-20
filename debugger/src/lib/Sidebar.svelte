@@ -4,7 +4,7 @@
 		faClipboardList,
 		faSyncAlt,
 		faGlobeAfrica,
-		faMobile
+		faMobile,
 	} from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -13,23 +13,23 @@
 		{
 			icon: faMobile,
 			label: 'Device',
-			path: '/'
+			path: '/',
 		},
 		{
 			icon: faClipboardList,
 			label: 'Logs',
-			path: '/logs'
+			path: '/logs',
 		},
 		{
 			icon: faSyncAlt,
 			label: 'State',
-			path: '/state'
+			path: '/state',
 		},
 		{
 			icon: faGlobeAfrica,
 			label: 'Network',
-			path: '/network'
-		}
+			path: '/network',
+		},
 	];
 </script>
 

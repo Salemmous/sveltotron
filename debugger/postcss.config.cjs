@@ -14,7 +14,7 @@ module.exports = {
 
 		!dev &&
 			cssnano({
-				preset: 'default'
-			})
-	]
+				preset: 'default',
+			}),
+	],
 };

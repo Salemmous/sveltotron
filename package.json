@@ -2,7 +2,9 @@
 	"name": "root",
 	"scripts": {
 		"example": "yarn workspace sveltotron-example dev",
-		"debugger": "yarn workspace @sveltotron/debugger electron"
+		"debugger": "yarn workspace @sveltotron/debugger electron",
+		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"private": true,
 	"devDependencies": {

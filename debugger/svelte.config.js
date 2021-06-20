@@ -8,7 +8,7 @@ export default {
 	kit: {
 		//adapter: node()
 		adapter: adapter(),
-		target: '#svelte'
+		target: '#svelte',
 
 		// vite: {
 		// 	compilerOptions: { dev }
@@ -17,7 +17,7 @@ export default {
 
 	preprocess: [
 		preprocess({
-			postcss: true
-		})
-	]
+			postcss: true,
+		}),
+	],
 };
