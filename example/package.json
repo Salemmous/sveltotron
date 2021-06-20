@@ -10,6 +10,7 @@
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
+	"private": true,
 	"devDependencies": {
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.4.0",
