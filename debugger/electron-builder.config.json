@@ -2,5 +2,9 @@
 	"asar": true,
 	"directories": { "output": "dist" },
 	"files": ["src/electron.cjs", { "from": "build", "to": "" }],
-	"productName": "Sveltotron"
+	"productName": "Sveltotron",
+	"linux": {
+		"executableName": "Sveltotron",
+		"artifactName": "${productName}-${version}.${ext}"
+	}
 }
