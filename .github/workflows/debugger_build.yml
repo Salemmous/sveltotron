@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/
+          asset_path: ./debugger/dist/Sveltotron.dmg
           asset_name: Sveltotron.dmg
           asset_content_type: application/octet-stream
 
@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/
+          asset_path: ./debugger/dist/Sveltotron.snap
           asset_name: Sveltotron.snap
           asset_content_type: application/octet-stream
 
@@ -83,7 +83,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/
+          asset_path: ./debugger/dist/Sveltotron.AppImage
           asset_name: Sveltotron.AppImage
           asset_content_type: application/x-executable
 
@@ -94,6 +94,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/
+          asset_path: ./debugger/dist/Sveltotron.exe
           asset_name: Sveltotron.exe
           asset_content_type: application/x-dosexec
