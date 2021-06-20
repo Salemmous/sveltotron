@@ -8,10 +8,18 @@ function proxyFetch(emit) {
 	const _fetch = window.fetch;
 	window.fetch = async (url, options, ...args) => {
 		const uid = Math.floor(Math.random() * 99999999).toString();
-		emit('network-request', { ...options, url, uid, date: new Date() });
+		const method = options?.method || 'GET';
+		emit('network-request', {
+			...options,
+			url,
+			uid,
+			date: new Date(),
+			method,
+		});
 		const res = await _fetch(url, options, ...args);
 		emit('network-response', {
 			...options,
+			method,
 			url,
 			uid,
 			status: res.status,

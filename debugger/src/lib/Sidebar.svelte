@@ -33,7 +33,7 @@
 	];
 </script>
 
-<nav class="bg-gray-700 flex flex-col p-2 space-y-8 py-8">
+<nav class="fixed bg-gray-700 flex flex-col p-2 space-y-8 py-8">
 	{#each PAGES as navPage}
 		<div
 			class="flex flex-col justify-center items-center cursor-pointer text-gray-400 hover:text-gray-200"
@@ -45,8 +45,11 @@
 	{/each}
 </nav>
 
+<div class="nav" />
+
 <style>
-	nav {
+	nav,
+	.nav {
 		height: 100vh;
 		--width: 6rem;
 		min-width: var(--width);
