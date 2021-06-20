@@ -1,13 +1,14 @@
 import type { IConnection } from '$lib/models/connection';
-import { derived, writable } from 'svelte/store';
+import { derived, Writable, writable } from 'svelte/store';
 
-export function init() {
+export function init(): void {
 	if (typeof (global as any).window !== 'undefined') {
 		initIPC();
 	}
 }
 
 async function initIPC() {
+	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	const { ipcRenderer } = require('electron');
 	ipcRenderer.on('server-started', (_, config) => {
 		server.set(config);
@@ -61,8 +62,9 @@ async function initIPC() {
 
 export const server = writable(null);
 const uniqueConnections = writable<{ [name: string]: IConnection }>({});
-export const connections = derived<any, IConnection[]>(uniqueConnections, ($uniqueConnections) =>
-	Object.values($uniqueConnections),
+export const connections = derived<Writable<{ [name: string]: IConnection }>, IConnection[]>(
+	uniqueConnections,
+	($uniqueConnections) => Object.values($uniqueConnections),
 );
 export const console = writable([]);
 export const networkRequests = writable([]);

@@ -10,9 +10,9 @@ export default {
 		adapter: adapter(),
 		target: '#svelte',
 
-		// vite: {
-		// 	compilerOptions: { dev }
-		// }
+		vite: {
+			compilerOptions: { dev },
+		},
 	},
 
 	preprocess: [

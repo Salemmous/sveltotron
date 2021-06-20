@@ -23,6 +23,7 @@ export function start(config) {
 			return value(...args);
 		};
 	});
+	// eslint-disable-next-line no-global-assign
 	console = newConsole;
 	initClient(socket);
 	proxy(address, emit);

@@ -12,8 +12,7 @@
 		res.json();
 	};
 	const handleAxiosRequest = async () => {
-		const res = await axios.get('https://randomuser.me/api/');
-		// res.data;
+		await axios.get('https://randomuser.me/api/');
 	};
 </script>
 

@@ -1,7 +1,6 @@
 <script>
 	import NetworkRequest from '$lib/components/NetworkRequest.svelte';
 	import { networkRequests, networkResponse } from '$lib/state';
-	import JSONTree from 'svelte-json-tree';
 </script>
 
 <section class="p-4">

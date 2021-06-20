@@ -50,8 +50,7 @@ function proxyXMLHttpRequest(address, emit) {
 	proxiedRequest.prototype.send = function (body) {
 		if (!this.requestInfo) return proxiedSend.apply(this, [].slice.call(arguments));
 		emit('network-request', { ...this.requestInfo, body, date: new Date() });
-		//Here is where you can add any code to process the request.
-		//If you want to pass the Ajax request object, pass the 'pointer' below
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const pointer = this;
 		const intervalId = window.setInterval(function () {
 			if (pointer.readyState != 4) {
@@ -65,13 +64,11 @@ function proxyXMLHttpRequest(address, emit) {
 				responseType: pointer.responseType,
 				date: new Date(),
 			});
-			//Here is where you can add any code to process the response.
-			//If you want to pass the Ajax request object, pass the 'pointer' below
 			clearInterval(intervalId);
-		}, 1); //I found a delay of 1 to be sufficient, modify it as you need.
+		}, 1);
 		return proxiedSend.apply(this, [].slice.call(arguments));
 	};
-	window.XMLHttpRequest = function (...args) {
+	window.XMLHttpRequest = function () {
 		return new proxiedRequest(arguments);
 	};
 }
