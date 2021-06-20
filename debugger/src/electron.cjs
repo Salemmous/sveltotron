@@ -30,6 +30,7 @@ function createMainWindow() {
 		y: mws.y,
 		width: mws.width,
 		height: mws.height,
+		titleBarStyle: 'hidden',
 
 		webPreferences: {
 			nodeIntegration: true,

@@ -33,10 +33,12 @@
 	];
 </script>
 
-<nav class="fixed bg-gray-700 flex flex-col p-2 space-y-8 py-8">
-	{#each PAGES as navPage}
+<nav class="fixed bg-gray-700 flex flex-col px-2 space-y-8 pb-8">
+	<div style="-webkit-app-region: drag" class="pt-8" />
+	{#each PAGES as navPage, i}
 		<div
 			class="flex flex-col justify-center items-center cursor-pointer text-gray-400 hover:text-gray-200"
+			style={i === 0 ? `margin-top:0;` : ''}
 			class:text-gray-50={$page.path === navPage.path}
 			on:click={() => goto(navPage.path)}
 		>

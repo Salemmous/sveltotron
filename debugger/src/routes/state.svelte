@@ -4,7 +4,7 @@
 </script>
 
 <section class="p-4">
-	<h1 class="text-blue-500">State</h1>
+	<h1 class="text-blue-50 cursor-default" style="-webkit-app-region: drag">State</h1>
 	<div class="pt-8 w-full space-y-4">
 		{#each Object.values($stores) as store}
 			<div class="py-8 border-t border-gray-100 border-opacity-50 w-full">
