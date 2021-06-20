@@ -55,45 +55,45 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset [macOS]
-        id: upload-release-asset
+        id: upload-release-asset-mac
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/Sveltotron.dmg
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
+          asset_path: ./debugger/dist/
+          asset_name: Sveltotron.dmg
+          asset_content_type: application/octet-stream
 
       - name: Upload Release Asset [linux/snap]
-        id: upload-release-asset
+        id: upload-release-asset-linux-snap
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/Sveltotron.snap
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
+          asset_path: ./debugger/dist/
+          asset_name: Sveltotron.snap
+          asset_content_type: application/octet-stream
 
       - name: Upload Release Asset [linux/AppImage]
-        id: upload-release-asset
+        id: upload-release-asset-linux-app
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/Sveltotron.AppImage
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
+          asset_path: ./debugger/dist/
+          asset_name: Sveltotron.AppImage
+          asset_content_type: application/x-executable
 
-      - name: Upload Release Asset [linux/win]
-        id: upload-release-asset
+      - name: Upload Release Asset [win]
+        id: upload-release-asset-win
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./debugger/dist/Sveltotron.exe
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
+          asset_path: ./debugger/dist/
+          asset_name: Sveltotron.exe
+          asset_content_type: application/x-dosexec
