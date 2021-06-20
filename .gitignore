@@ -1,3 +1,6 @@
 node_modules
 *.log
 .svelte-kit
+build/
+dist/
+.DS_Store
