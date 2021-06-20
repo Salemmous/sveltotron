@@ -1,10 +1,14 @@
 {
-	"name": "vite-plugin-sveltotron",
+	"name": "vite-plugin-svelte-sveltotron",
 	"version": "1.0.0",
 	"main": "index.mjs",
 	"author": "Thomas De Bluts",
 	"license": "MIT",
 	"dependencies": {
 		"@sveltotron/client": "1.0.0"
-	}
+	},
+	"keywords": [
+		"vite-plugin",
+		"svelte"
+	]
 }

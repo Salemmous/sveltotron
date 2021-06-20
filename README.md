@@ -9,7 +9,7 @@ It is heavily inspired by [Reactotron](https://github.com/infinitered/reactotron
 
 **The repos have not been published yet. Use this repo as a dependency.**
 
-1. Add the [`vite-plugin-sveltotron` dependency](/./packages/vite-plugin-sveltotron).
+1. Add the [`vite-plugin-svelte-sveltotron` dependency](/./packages/vite-plugin-svelte-sveltotron).
 
 2. In `svelte.config.js`, add the following line:
    `import sveltotron from 'vite-plugin-sveltotron';`

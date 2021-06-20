@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import sveltotron from 'vite-plugin-sveltotron';
+import sveltotron from 'vite-plugin-svelte-sveltotron';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
