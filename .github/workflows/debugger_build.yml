@@ -1,47 +1,28 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Debugger builder
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   workflow_dispatch:
+    inputs:
+      release:
+        description: 'Release'
+        required: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
       - name: Electron Builder Action
-        # You may pin to the exact commit or the version.
-        # uses: samuelmeuli/action-electron-builder@92327c67bc45ff7c38bf55d8aa8c4d75b7ea38e7
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
-          # GitHub authentication token
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Base64-encoded code signing certificate for macOS
-          # mac_certs: # optional
-          # Password for decrypting `mac_certs`
-          # mac_certs_password: # optional
-          # Whether the app should be released after a successful build
-          # release: # optional
-          # Base64-encoded code signing certificate for Windows
-          # windows_certs: # optional
-          # Password for decrypting `windows_certs`
-          # windows_certs_password: # optional
-          # Directory where NPM/Yarn commands should be run
-          package_root: ./debugger
-          # Name of the optional NPM build script which is executed before `electron-builder`
-          # build_script_name: # optional, default is build
-          # Whether the action should execute the NPM build script before running `electron-builder`
-          skip_build: # optional
-          # Whether to run `electron-builder` using the Vue CLI plugin instead of calling the command directly
-          use_vue_cli: # optional
-          # Other arguments to pass to the `electron-builder` command, e.g. configuration overrides
-          args: # optional, default is 
-          # Maximum number of attempts for completing the build and release step
-          max_attempts: # optional, default is 1
-          # Directory where `electron-builder` commands should be run
-          app_root: # optional
+          build_script_name: build-debugger
+          app_root: ./debugger
+          release: ${{ github.event.inputs.logLevel }}"
