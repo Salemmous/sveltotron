@@ -1,11 +1,21 @@
 import io from 'socket.io-client';
 import { proxy } from './proxy';
 
+const clientId = getClientId();
+
+function getClientId() {
+	if (typeof window === 'undefined') return Math.ceil(Math.random() * 999999).toString();
+	const clientId =
+		window.sessionStorage.getItem('__sveltotron_uid__') ||
+		Math.ceil(Math.random() * 999999).toString();
+	return clientId;
+}
+
 const DEFAULT_CONFIG = {
 	port: 9090,
 	host: '127.0.0.1',
 	clientType: 'web',
-	clientId: Math.ceil(Math.random() * 999999).toString(),
+	clientId,
 };
 
 let client;
@@ -13,6 +23,7 @@ export function start(config) {
 	const port = config?.port || DEFAULT_CONFIG.port;
 	const host = config?.host || DEFAULT_CONFIG.host;
 	const clientId = config?.clientId || DEFAULT_CONFIG.clientId;
+	if (typeof window !== 'undefined') window.sessionStorage.setItem('__sveltotron_uid__', clientId);
 	const address = `http://${host}:${port}`;
 	const socket = io(address);
 	socket.emit('init', { name: clientId });
