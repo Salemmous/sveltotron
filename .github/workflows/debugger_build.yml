@@ -26,7 +26,7 @@ jobs:
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          build_script_name: build-debugger
+          # build_script_name: build-debugger
           package_root: ./debugger
           app_root: ./debugger
           release: ${{ github.event.inputs.logLevel }}"
