@@ -3,8 +3,8 @@
 	"directories": { "output": "dist" },
 	"files": ["src/electron.cjs", { "from": "build", "to": "" }],
 	"productName": "Sveltotron",
+	"artifactName": "${productName}.${ext}",
 	"linux": {
-		"executableName": "Sveltotron",
-		"artifactName": "${productName}-${version}.${ext}"
+		"executableName": "Sveltotron"
 	}
 }

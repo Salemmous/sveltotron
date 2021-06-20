@@ -10,7 +10,8 @@
 		"electron": "concurrently --kill-others 'svelte-kit dev -p 4000' 'electron src/electron.cjs'",
 		"build": "svelte-kit build",
 		"dev:package": "yarn build && electron-builder --config electron-builder.config.json --dir",
-		"package": "yarn build && electron-builder --config electron-builder.config.json"
+		"package": "yarn build && electron-builder --config electron-builder.config.json",
+		"dist": "electron-builder --config electron-builder.config.json"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-node": "next",
